@@ -25,7 +25,7 @@ NODE_TESTED="v5.1.0"
 ARM=$(uname -m) 
 
 # Check the Raspberry Pi version.
-if [ "$ARM" != "armv7l" ]; then
+if [ "$ARM" != "armv7l" && "$ARM" != "armv6l" ]; then
 	echo -e "\e[91mSorry, your Raspberry Pi is not supported."
 	echo -e "\e[91mPlease run MagicMirror on a Raspberry Pi 2 or 3."
 	echo -e "\e[91mIf this is a Pi Zero, you are in the same boat as the original Raspberry Pi. You must run in server only mode."
@@ -153,7 +153,7 @@ read -p "Do you want use pm2 for auto starting of your MagicMirror (y/N)?" choic
 if [[ $choice =~ ^[Yy]$ ]]; then
     sudo npm install -g pm2
     sudo su -c "env PATH=$PATH:/usr/bin pm2 startup linux -u pi --hp /home/pi"
-    pm2 start ~/MagicMirror/installers/pm2_MagicMirror.json
+    pm2 start ~/Workspace/MagicMirror/installers/pm2_MagicMirror.json
     pm2 save
 fi
 
